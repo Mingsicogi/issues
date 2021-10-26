@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,7 +63,9 @@ public class ServletApplication {
     public FilterRegistrationBean<MyFilter> myFilterFilterRegistrationBean() {
         FilterRegistrationBean<MyFilter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
 
-        filterFilterRegistrationBean.addUrlPatterns("/*");
+        filterFilterRegistrationBean.addUrlPatterns("/servlet/thread/issue");
+        filterFilterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
+
         filterFilterRegistrationBean.setFilter(new MyFilter());
 
         return filterFilterRegistrationBean;
